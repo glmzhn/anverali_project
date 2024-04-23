@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <h1>Your Profile</h1>
+    <a href="{% url 'profile-executor' %}">Executor Version of Profile</a>
+    <br>
+    <ul>
+        {% if user.username %}
+            <p><strong>Username: {{ user.username }}</strong></p>
+        {% endif %}
+        {% if user.email %}
+            <p><strong>Email: {{ user.email }}</strong></p>
+        {% endif %}
+        {% if user.first_name %}
+            <p><strong>Name: {{ user.first_name }}</strong></p>
+        {% endif %}
+        {% if user.orderer %}
+            <p><strong>Account type: Orderer</strong></p>
+        {% elif not user.orderer %}
+            <p><strong>You are NOT an Orderer</strong></p>
+        {% endif %}
+        <br><br>
+        {% if user.orderer.phone_number %}
+            <p><strong>Phone Number: {{ user.orderer.phone_number }}</strong></p>
+        {% endif %}
+    
+        <a href="{% url 'become_executor' %}" class="btn btn-primary">Become Executor</a>
+        <a href="{% url 'become_orderer' %}" class="btn btn-primary">Become Orderer</a>
+
+    </ul>
+{% endblock %}

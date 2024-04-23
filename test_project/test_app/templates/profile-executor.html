@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <h1>Your Profile</h1>
+    <br>
+    <ul>
+        {% if user.username %}
+            <p><strong>Username: {{ user.username }}</strong></p>
+        {% endif %}
+        {% if user.email %}
+            <p><strong>Email: {{ user.email }}</strong></p>
+        {% endif %}
+        {% if user.first_name %}
+            <p><strong>Name: {{ user.first_name }}</strong></p>
+        {% endif %}
+        {% if user.executor %}
+            <p><strong>Account type: Executor</strong></p>
+        {% elif not user.executor %}
+            <p><strong>You are NOT an Executor</strong></p>
+        {% endif %}
+        <br><br>
+        {% if user.executor.phone_number %}
+            <p>Phone Number: {{ user.executor.phone_number }}</p>
+        {% endif %}
+        {% if user.executor.experience %}
+            <p><strong>Experience: </strong></p>
+            <p><strong>- Years: {{ user.executor.experience.years }}</strong></p>
+            <p><strong>- Months: {{ user.executor.experience.months }}</strong></p>
+            <p><strong>- Weeks: {{ user.executor.experience.weeks }}</strong></p>
+        {% endif %}
+        {% if user.executor.job_experience %}
+            <a href="{% url 'set_experience' %}" class="btn btn-primary">Set Experience</a>
+        {% endif %}
+
+
+        <a href="{% url 'become_executor' %}" class="btn btn-primary">Become Executor</a>
+        <a href="{% url 'become_orderer' %}" class="btn btn-primary">Become Orderer</a>
+
+    </ul>
+{% endblock %}
